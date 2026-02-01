@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SnakeGame.Core;
@@ -12,22 +13,24 @@ public class Game1 : Game
 
     private Board _board = null!;
 
+    private Texture2D _pixel = null!;
+    private Rectangle _hudRect;
+    private Rectangle _boardRect;
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
-
-        _board = new Board(GameConfig.Cols,GameConfig.Rows,GameConfig.CellSize);
-        _graphics.PreferredBackBufferWidth = _board.PixelWidth;
-        _graphics.PreferredBackBufferHeight = _board.PixelHeight;
-        _graphics.ApplyChanges();
-
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
+        _board = new Board(GameConfig.Cols, GameConfig.Rows, GameConfig.CellSize);
+
+        _graphics.PreferredBackBufferWidth  = _board.PixelWidth;
+        _graphics.PreferredBackBufferHeight = _board.PixelHeight + GameConfig.HudHeight;
+        _graphics.ApplyChanges();
 
         base.Initialize();
     }
@@ -36,13 +39,17 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        // TODO: use this.Content to load your game content here
+        _pixel = new Texture2D(GraphicsDevice,1,1);
+        _pixel.SetData(new [] {Color.White});
+
+        _hudRect = new Rectangle(0,0,_board.PixelWidth,_board.PixelHeight);
+        _boardRect = new Rectangle(0,GameConfig.HudHeight,_board.PixelWidth,_board.PixelHeight);
     }
 
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
+           Exit();
 
         // TODO: Add your update logic here
 
@@ -53,7 +60,41 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.Black);
 
-        // TODO: Add your drawing code here
+        Window.Title = $"W:{Window.ClientBounds.Width} H:{Window.ClientBounds.Height}";
+
+        _spriteBatch.Begin();
+        
+        //HUD (Faixa Superior)
+        _spriteBatch.Draw(_pixel,_hudRect,Color.DarkSlateGray);
+        
+        // Área do Board
+        _spriteBatch.Draw(_pixel,_boardRect,Color.Black);
+        
+        //Linha separando HUD do Board
+        _spriteBatch.Draw(_pixel,new Rectangle(0,GameConfig.HudHeight-1,_board.PixelWidth,1),Color.Gray);
+        
+
+        int boardTop = GameConfig.HudHeight;
+        //linhas verticais
+        for (int x = 0; x <= _board.Cols; x++)
+        {
+            int px = x * _board.CellSize;
+            _spriteBatch.Draw(_pixel,
+                                new Rectangle(px,boardTop,1,_board.PixelHeight),
+                                Color.DimGray);
+        }
+
+        //linhas horizontais
+        for (int y = 0; y <= _board.Rows; y++)
+        {
+            int py = boardTop + y * _board.CellSize;
+            _spriteBatch.Draw(_pixel, 
+                                new Rectangle(0,py,_board.PixelWidth,1),
+                                Color.DimGray);
+        }
+       
+       
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }
