@@ -31,3 +31,4 @@ C:\Users\Cap Muniz\Documents\1. PESSOAL\3.Programacao\2.Snake\src\SnakeGame\obj\
 C:\Users\Cap Muniz\Documents\1. PESSOAL\3.Programacao\2.Snake\src\SnakeGame\obj\Debug\net9.0\SnakeGame.pdb
 C:\Users\Cap Muniz\Documents\1. PESSOAL\3.Programacao\2.Snake\src\SnakeGame\obj\Debug\net9.0\SnakeGame.genruntimeconfig.cache
 C:\Users\Cap Muniz\Documents\1. PESSOAL\3.Programacao\2.Snake\src\SnakeGame\obj\Debug\net9.0\ref\SnakeGame.dll
+C:\Users\Cap Muniz\Documents\1. PESSOAL\3.Programacao\2.Snake\src\snakegame\obj\Debug\net9.0\SnakeGame.sourcelink.json
