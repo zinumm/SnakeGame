@@ -13,6 +13,8 @@ public sealed class Snake
         Body.Add(start);
         Body.Add(new Point(start.X - 1, start.Y));
         Body.Add(new Point(start.X - 2, start.Y));
+
+        Direction = new Point(1,0);
     }
 
     public void Step(bool grow = false)
@@ -22,5 +24,24 @@ public sealed class Snake
 
         Body.Insert(0, next);
         if (!grow ) Body.RemoveAt(Body.Count - 1);
+    }
+
+    public void SetDirection(Point dir)
+    {
+        // Só aceita 4 direções
+        if (!IsCardinal(dir)) return;
+
+        //Anti-reversão: não pode inverter
+        if (dir.X == -Direction.X && dir.Y == -Direction.Y) return;
+
+        Direction = dir;
+    }
+
+    private static bool IsCardinal(Point d)
+    {
+        // (1,0) , (-1,0), (0,1), (0,-1)
+        int ax = d.X < 0 ? -d.X : d.X;
+        int ay = d.Y < 0 ? -d.Y : d.Y;
+        return (ax + ay) == 1;
     }
 }
