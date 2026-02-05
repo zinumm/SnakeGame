@@ -26,12 +26,13 @@ public sealed class GameRenderer
         _boardRect = new Rectangle(0, GameConfig.HudHeight, _board.PixelWidth, _board.PixelHeight);
     }
 
-    public void Draw(Snake snake)
+    public void Draw(Snake snake, GameState state)
     {
         _sb.Begin();
 
         //HUD
-        _sb.Draw(_pixel, _hudRect, Color.DarkSlateGray);
+        var hudColor = state == GameState.GameOver ? Color.DarkRed : Color.DarkSlateGray;
+        _sb.Draw(_pixel, _hudRect, hudColor);
 
         //Board
         _sb.Draw(_pixel, _boardRect, Color.Black);

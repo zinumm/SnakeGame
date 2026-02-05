@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cap Muniz\\Documents\\1. PESSOAL\\3.Programacao\\2.Snake\\src\\SnakeGame\\SnakeGame.csproj": {}
+    "C:\\Users\\Cap Muniz\\Documents\\1. PESSOAL\\3.Programacao\\2.Snake\\src\\snakegame\\SnakeGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cap Muniz\\Documents\\1. PESSOAL\\3.Programacao\\2.Snake\\src\\SnakeGame\\SnakeGame.csproj": {
+    "C:\\Users\\Cap Muniz\\Documents\\1. PESSOAL\\3.Programacao\\2.Snake\\src\\snakegame\\SnakeGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cap Muniz\\Documents\\1. PESSOAL\\3.Programacao\\2.Snake\\src\\SnakeGame\\SnakeGame.csproj",
+        "projectUniqueName": "C:\\Users\\Cap Muniz\\Documents\\1. PESSOAL\\3.Programacao\\2.Snake\\src\\snakegame\\SnakeGame.csproj",
         "projectName": "SnakeGame",
-        "projectPath": "C:\\Users\\Cap Muniz\\Documents\\1. PESSOAL\\3.Programacao\\2.Snake\\src\\SnakeGame\\SnakeGame.csproj",
+        "projectPath": "C:\\Users\\Cap Muniz\\Documents\\1. PESSOAL\\3.Programacao\\2.Snake\\src\\snakegame\\SnakeGame.csproj",
         "packagesPath": "C:\\Users\\Cap Muniz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cap Muniz\\Documents\\1. PESSOAL\\3.Programacao\\2.Snake\\src\\SnakeGame\\obj\\",
+        "outputPath": "C:\\Users\\Cap Muniz\\Documents\\1. PESSOAL\\3.Programacao\\2.Snake\\src\\snakegame\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Cap Muniz\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -44,4 +44,10 @@ public sealed class Snake
         int ay = d.Y < 0 ? -d.Y : d.Y;
         return (ax + ay) == 1;
     }
+
+    public Point NextHead()
+    {
+        var head = Body[0];
+        return new Point(head.X + Direction.X, head.Y + Direction.Y);
+    }
 }
