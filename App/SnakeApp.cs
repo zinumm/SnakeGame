@@ -19,7 +19,7 @@ public sealed class SnakeApp
     private GameRenderer _renderer = null!;
 
     private float _tickAcc = 0f;
-    private const float TickInterval = 0.15f;
+    private readonly Speed _speed = new (0.15f, 0.06f, 0.005f);
 
     private readonly InputState _input = new();
 
@@ -71,9 +71,9 @@ public sealed class SnakeApp
 
         _tickAcc += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        while (_tickAcc >= TickInterval)
+        while (_tickAcc >= _speed.TickInterval)
         {
-            _tickAcc -= TickInterval;
+            _tickAcc -= _speed.TickInterval;
             
             var nextHead = _snake.NextHead();
 
@@ -91,6 +91,8 @@ public sealed class SnakeApp
             if (willEat)
             {
                 _score.Add(1);
+                _speed.OnEat();
+
                 var foodPos = FoodSpawner.Spawn(_board, _snake.Body,_rng);
                 _food.SetPosition(foodPos);
             }
@@ -109,6 +111,8 @@ public sealed class SnakeApp
         _snake = new Snake(start);
         
         _score.Reset();
+
+        _speed.Reset();
 
         var foodPos = FoodSpawner.Spawn(_board, _snake.Body, _rng);
         _food = new Food(foodPos);
