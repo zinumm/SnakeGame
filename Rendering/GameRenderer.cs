@@ -26,7 +26,7 @@ public sealed class GameRenderer
         _boardRect = new Rectangle(0, GameConfig.HudHeight, _board.PixelWidth, _board.PixelHeight);
     }
 
-    public void Draw(Snake snake, GameState state)
+    public void Draw(Snake snake, Food food, GameState state, int score)
     {
         _sb.Begin();
 
@@ -41,8 +41,15 @@ public sealed class GameRenderer
         _sb.Draw(_pixel, new Rectangle(0, GameConfig.HudHeight - 1, _board.PixelWidth, 1), Color.DimGray);
 
         DrawGrid();
+        
+        //cobra
         DrawSnake(snake);
 
+        //comida
+        DrawCell(food.Position, Color.OrangeRed);
+
+        //barrinha de score
+        DrawScoreBars(score);
         _sb.End();
     }
 
@@ -65,18 +72,40 @@ public sealed class GameRenderer
 
     private void DrawSnake(Snake snake)
     {
-        int top = GameConfig.HudHeight;
-
         foreach (var p in snake.Body)
-        {
-            var rect =  new Rectangle(
-                p.X * _board.CellSize,
-                top + p.Y * _board.CellSize,
-                _board.CellSize,
-                _board.CellSize
-            );
+            DrawCell(p, Color.LimeGreen);
+    }
 
-            _sb.Draw(_pixel, rect, Color.LimeGreen);
+    private void DrawCell(Microsoft.Xna.Framework.Point p, Color color)
+    {
+        int top = GameConfig.HudHeight;
+        var rect = new Rectangle(
+            p.X * _board.CellSize,
+            top + p.Y * _board.CellSize,
+            _board.CellSize,
+            _board.CellSize
+        );
+        _sb.Draw(_pixel, rect, color);
+    }
+
+    private void DrawScoreBars(int score)
+    {
+        int x = 8;
+        int y = 8;
+        int size = 8;
+        int gap = 2;
+
+        for (int i = 0; i < score; i++)
+        {
+            _sb.Draw(_pixel, new Rectangle(x, y, size, size), Color.Gold);
+            x += size + gap;
+
+            //quebra linha se passar a largura
+            if (x + size > _board.PixelWidth - 8)
+            {
+                x = 8;
+                y += size + gap;
+            }
         }
     }
 }

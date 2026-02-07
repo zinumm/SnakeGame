@@ -5,6 +5,7 @@ using SnakeGame.Core;
 using SnakeGame.Rendering;
 using SnakeGame.Input;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace SnakeGame.App;
 
@@ -29,6 +30,10 @@ public sealed class SnakeApp
         _graphics = graphics;
         _window = window;
     } 
+
+    private readonly Random _rng = new();
+    private Food _food = null!;
+    private readonly Score _score = new();
 
     public void Initialize()
     {
@@ -73,19 +78,21 @@ public sealed class SnakeApp
             var nextHead = _snake.NextHead();
 
             //colisão com a parede
-            if (Rules.HitsWall(nextHead, _board))
-            {
-                _state = GameState.GameOver;
-                break;
-            }
+            if (Rules.HitsWall(nextHead, _board)) { _state = GameState.GameOver; break; }
             
-            _snake.Step();
+            //Comer?
+            bool willEat = nextHead == _food.Position;
+
+            _snake.Step(grow: willEat);
 
             //colisão com o corpo
-            if (Rules.HitSelf(_snake.Body))
+            if (Rules.HitSelf(_snake.Body)) { _state = GameState.GameOver; break; }
+
+            if (willEat)
             {
-                _state = GameState.GameOver;
-                break;
+                _score.Add(1);
+                var foodPos = FoodSpawner.Spawn(_board, _snake.Body,_rng);
+                _food.SetPosition(foodPos);
             }
         }
     }
@@ -93,13 +100,19 @@ public sealed class SnakeApp
     public void Draw(GameTime gameTime, GraphicsDevice gd)
     {
         gd.Clear(Color.CornflowerBlue);
-        _renderer.Draw(_snake, _state);
+        _renderer.Draw(_snake, _food, _state, _score.Value);
     }
 
     private void Reset()
     {
         var start = new Point(GameConfig.Cols / 2, GameConfig.Rows / 2);
         _snake = new Snake(start);
+        
+        _score.Reset();
+
+        var foodPos = FoodSpawner.Spawn(_board, _snake.Body, _rng);
+        _food = new Food(foodPos);
+
         _state = GameState.Playing;
         _tickAcc = 0f;
     }
