@@ -49,7 +49,8 @@ public sealed class SnakeApp
     public void LoadContent(GraphicsDevice gd, ContentManager content)
     {
         _graphics.ApplyChanges();
-        _renderer = new GameRenderer(gd, _board);
+        var sprites = new SpriteBank(content);
+        _renderer = new GameRenderer(gd, _board, sprites);
     }
 
     public void Update(GameTime gameTime)
@@ -120,4 +121,5 @@ public sealed class SnakeApp
         _state = GameState.Playing;
         _tickAcc = 0f;
     }
+
 }
