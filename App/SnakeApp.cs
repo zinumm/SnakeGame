@@ -25,6 +25,8 @@ public sealed class SnakeApp
 
     private GameState _state = GameState.Playing;
 
+    private int _highScore = 0;
+
     public SnakeApp(GraphicsDeviceManager graphics, GameWindow window)
     {
         _graphics = graphics;
@@ -50,7 +52,7 @@ public sealed class SnakeApp
     {
         _graphics.ApplyChanges();
         var sprites = new SpriteBank(content);
-        _renderer = new GameRenderer(gd, _board, sprites);
+        _renderer = new GameRenderer(gd, _board, sprites, content);
     }
 
     public void Update(GameTime gameTime)
@@ -92,6 +94,8 @@ public sealed class SnakeApp
             if (willEat)
             {
                 _score.Add(1);
+                if(_score.Value > _highScore) _highScore = _score.Value;
+
                 _speed.OnEat();
 
                 var foodPos = FoodSpawner.Spawn(_board, _snake.Body,_rng);
@@ -103,7 +107,7 @@ public sealed class SnakeApp
     public void Draw(GameTime gameTime, GraphicsDevice gd)
     {
         gd.Clear(Color.CornflowerBlue);
-        _renderer.Draw(_snake, _food, _state, _score.Value);
+        _renderer.Draw(_snake, _food, _state, _score.Value, _highScore);
     }
 
     private void Reset()

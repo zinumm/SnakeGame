@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Cap Muniz/Documents/1. PESSOAL/3.Programacao/2.Snake/src/SnakeGame/Content/snakeTail.png","C:/Users/Cap Muniz/Documents/1. PESSOAL/3.Programacao/2.Snake/src/SnakeGame/Content/bin/DesktopGL/Content/snakeTail.xnb","TextureProcessor","Texture2DContent",207,1109,0,219575
+"C:/Users/Cap Muniz/Documents/1. PESSOAL/3.Programacao/2.Snake/src/SnakeGame/Content/hud.spritefont","C:/Users/Cap Muniz/Documents/1. PESSOAL/3.Programacao/2.Snake/src/SnakeGame/Content/bin/DesktopGL/Content/hud.xnb","FontDescriptionProcessor","SpriteFontContent",527,21531,0,3964608

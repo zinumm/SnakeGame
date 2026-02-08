@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:food.png
 
+#begin hud.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:hud.spritefont
+
 #begin snakeBody.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -38,3 +38,4 @@ C:\Users\Cap Muniz\Documents\1. PESSOAL\3.Programacao\2.Snake\src\SnakeGame\bin\
 C:\Users\Cap Muniz\Documents\1. PESSOAL\3.Programacao\2.Snake\src\SnakeGame\bin\Debug\net9.0\Content\snakeTail.xnb
 C:\Users\Cap Muniz\Documents\1. PESSOAL\3.Programacao\2.Snake\src\SnakeGame\bin\Debug\net9.0\Content\tileDark.xnb
 C:\Users\Cap Muniz\Documents\1. PESSOAL\3.Programacao\2.Snake\src\SnakeGame\bin\Debug\net9.0\Content\tileLight.xnb
+C:\Users\Cap Muniz\Documents\1. PESSOAL\3.Programacao\2.Snake\src\SnakeGame\bin\Debug\net9.0\Content\hud.xnb

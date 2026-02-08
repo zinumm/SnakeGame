@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SnakeGame.Core;
 
@@ -15,7 +16,9 @@ public sealed class GameRenderer
     private readonly Rectangle _boardRect;
     private readonly SpriteBank _sprites;
 
-    public GameRenderer(GraphicsDevice gd, Board board, SpriteBank sprites)
+    private readonly HudRenderer _hud;
+
+    public GameRenderer(GraphicsDevice gd, Board board, SpriteBank sprites, ContentManager content)
     {
         _board = board;
 
@@ -28,15 +31,16 @@ public sealed class GameRenderer
         _boardRect = new Rectangle(0, GameConfig.HudHeight, _board.PixelWidth, _board.PixelHeight);
 
         _sprites = sprites;
+
+        _hud = new HudRenderer(content, gd, _board.PixelWidth);
     }
 
-    public void Draw(Snake snake, Food food, GameState state, int score)
+    public void Draw(Snake snake, Food food, GameState state, int score, int highScore)
     {
         _sb.Begin();
 
         //HUD
-        var hudColor = state == GameState.GameOver ? Color.DarkRed : Color.DarkSlateGray;
-        _sb.Draw(_pixel, _hudRect, hudColor);
+        _hud.Draw(_sb, state, score, highScore);
 
         //Board
         DrawTiles();
