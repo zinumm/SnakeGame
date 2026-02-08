@@ -44,8 +44,9 @@ public sealed class SnakeApp
         _graphics.PreferredBackBufferWidth = _board.PixelWidth;
         _graphics.PreferredBackBufferHeight = _board.PixelHeight + GameConfig.HudHeight;
         
-        var start = new Point(GameConfig.Cols / 2, GameConfig.Rows / 2);
         Reset();
+        _state = GameState.Title;
+
     } 
 
     public void LoadContent(GraphicsDevice gd, ContentManager content)
@@ -57,14 +58,25 @@ public sealed class SnakeApp
 
     public void Update(GameTime gameTime)
     {
-        _input.Update(); 
+        _input.Update();
+
+        if (_state == GameState.Title)
+        {
+            if (_input.IsKeyPressed(Keys.Enter))
+                _state = GameState.Playing;
+            return;
+        }
 
         if (_state == GameState.GameOver)
         {
             if (_input.IsKeyPressed(Keys.R))
+            {
                 Reset();
+                _state = GameState.Playing;
+            }
             return;
         }
+        
 
 
         if (_input.IsKeyPressed(Keys.Up) || _input.IsKeyPressed(Keys.W))    _snake.SetDirection(new Point(0, -1));
@@ -116,13 +128,11 @@ public sealed class SnakeApp
         _snake = new Snake(start);
         
         _score.Reset();
-
         _speed.Reset();
 
         var foodPos = FoodSpawner.Spawn(_board, _snake.Body, _rng);
         _food = new Food(foodPos);
 
-        _state = GameState.Playing;
         _tickAcc = 0f;
     }
 

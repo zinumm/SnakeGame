@@ -31,6 +31,7 @@ public sealed class HudRenderer
 
         string right = state switch
         {
+            GameState.Title => "Enter = Start",
             GameState.Playing => "WASD / Arrows",
             GameState.GameOver => "GAME OVER - R = Restart",
             _ => ""
